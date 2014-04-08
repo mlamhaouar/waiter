@@ -14,7 +14,6 @@ public class Table {
 
     private static final String SAME_PLATE = "Same";
     private static final String FOR = "for";
-    private static final String REGEX_PLATE_FOR = ".* " + FOR + " [1-9]";
     private static final String MISSING = "MISSING";
     private final int sizeOfTable;
     private final LinkedHashMap<Customer, Plate> platesCustomer;
@@ -34,7 +33,7 @@ public class Table {
             plate = createSamePlatFromLastPlate();
         } else {
             plate = new Plate(plateName);
-            if (isForTowPlat(plateName)) {
+            if (plate.isPlateFor()) {
                 addToPlatesFor(plate, plateName);
             }
         }
@@ -50,18 +49,9 @@ public class Table {
                 platesFor.put(plate, valueNumber);
             }
         } else {
-            Integer nomberOfPlate = makeNumberFromPlateFor(plateName);
+            Integer nomberOfPlate = plate.makeNumberPlateFor();
             platesFor.put(plate, nomberOfPlate - 1);
         }
-    }
-
-    private Integer makeNumberFromPlateFor(String plateName) {
-        final int endPositionFor = plateName.lastIndexOf(FOR) + FOR.length();
-        return Integer.valueOf(plateName.substring(endPositionFor, plateName.length()).trim());
-    }
-
-    private boolean isForTowPlat(String plateName) {
-        return plateName.matches(REGEX_PLATE_FOR);
     }
 
     private boolean isSamePlate(String plateName) {

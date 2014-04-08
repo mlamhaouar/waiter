@@ -4,6 +4,9 @@ public class Plate {
 
     private String name;
 
+    private static final String FOR = "for";
+    private static final String REGEX_PLATE_FOR = ".* " + FOR + " [1-9]";
+
     public Plate(String name) {
         this.name = name;
     }
@@ -14,6 +17,15 @@ public class Plate {
 
     public Plate createSamePlat() {
         return new Plate(name);
+    }
+
+    public boolean isPlateFor() {
+        return this.name.matches(REGEX_PLATE_FOR);
+    }
+
+    public int makeNumberPlateFor() {
+        final int endPositionFor = this.name.lastIndexOf(FOR) + FOR.length();
+        return Integer.valueOf(this.name.substring(endPositionFor, this.name.length()).trim());
     }
 
     @Override
