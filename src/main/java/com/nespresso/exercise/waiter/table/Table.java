@@ -86,7 +86,7 @@ public class Table {
             StringBuilder platForOut = constructMessageMessingPlat();
             throw new RuntimeException(platForOut.toString());
         } else {
-            throw new RuntimeException("Number of plates is higher the number of people!");
+            throw new RuntimeException("Number of plates is higher the number of customers!");
         }
     }
 
