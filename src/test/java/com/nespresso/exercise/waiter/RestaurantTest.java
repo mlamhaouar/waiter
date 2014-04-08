@@ -38,9 +38,10 @@ public class RestaurantTest {
         restaurant.customerSays(tableId, "Jim: Same");
         restaurant.customerSays(tableId, "Joe: Fish for 2");
         restaurant.customerSays(tableId, "Jack: Chips");
-        restaurant.customerSays(tableId, "John: Chips");
-        assertEquals("MISSING 1 for Fish for 2", restaurant.createOrder(tableId));
-        restaurant.customerSays(tableId, "John: Fish for 2");
-        assertEquals("Fish for 2, Soup, Chips, Fish for 2", restaurant.createOrder(tableId));
+        restaurant.customerSays(tableId, "John: Tangia for 2");
+        assertEquals("MISSING 1 for Fish for 2\nMISSING 1 for Tangia for 2", restaurant.createOrder(tableId));
+        restaurant.customerSays(tableId, "Jim: Tangia for 2");
+        restaurant.customerSays(tableId, "Jack: Fish for 2");
+        assertEquals("Fish for 2, Tangia for 2, Fish for 2, Tangia for 2", restaurant.createOrder(tableId));
     }
 }

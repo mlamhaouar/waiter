@@ -1,7 +1,6 @@
 package com.nespresso.exercise.waiter.table;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -25,7 +24,7 @@ public class Table {
     public Table(int sizeOfTable) {
         this.sizeOfTable = sizeOfTable;
         this.platesCustomer = new LinkedHashMap<Customer, Plate>();
-        platesFor = new HashMap<Plate, Integer>();
+        platesFor = new LinkedHashMap<Plate, Integer>();
     }
 
     public void makePlat(String customerName, String plateName) {
