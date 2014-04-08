@@ -50,12 +50,12 @@ public class Table {
                 platesFor.put(plate, valueNumber);
             }
         } else {
-            Integer nomberOfPlate = getNumberFromPlateFor(plateName);
+            Integer nomberOfPlate = makeNumberFromPlateFor(plateName);
             platesFor.put(plate, nomberOfPlate - 1);
         }
     }
 
-    private Integer getNumberFromPlateFor(String plateName) {
+    private Integer makeNumberFromPlateFor(String plateName) {
         final int endPositionFor = plateName.lastIndexOf(FOR) + FOR.length();
         return Integer.valueOf(plateName.substring(endPositionFor, plateName.length()).trim());
     }
@@ -78,15 +78,20 @@ public class Table {
         for (Customer customer : platesCustomer.keySet()) {
             platesOrder.add(platesCustomer.get(customer));
         }
-        if (platesCustomer.size() == sizeOfTable && plateForIsCommanded()) {
+        if (platesNumberIsSameOfCustomerNumber() && plateForIsCommanded()) {
             return new Order(platesOrder);
         } else if (platesCustomer.size() < sizeOfTable) {
             throw new RuntimeException(MISSING + " " + (sizeOfTable - platesCustomer.size()));
         } else if (!plateForIsCommanded()) {
             StringBuilder platForOut = constructMessageMessingPlat();
             throw new RuntimeException(platForOut.toString());
+        } else {
+            throw new RuntimeException("Number of plates is higher the number of people!");
         }
-        return null;
+    }
+
+    private boolean platesNumberIsSameOfCustomerNumber() {
+        return platesCustomer.size() == sizeOfTable;
     }
 
     private StringBuilder constructMessageMessingPlat() {
