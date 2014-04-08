@@ -2,6 +2,7 @@ package com.nespresso.exercise.waiter.table;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,7 +97,14 @@ public class Table {
 
     private StringBuilder constructMessageMessingPlat() {
         StringBuilder platForOut = new StringBuilder();
-        for (Plate plate : platesFor.keySet()) {
+        final Iterator<Plate> iteratorMissongPlatesFor = platesFor.keySet().iterator();
+        if (iteratorMissongPlatesFor.hasNext()) {
+            final Plate missongPlateFor = iteratorMissongPlatesFor.next();
+            platForOut.append(makeMessingPlateFor(missongPlateFor));
+        }
+        while (iteratorMissongPlatesFor.hasNext()) {
+            Plate plate = iteratorMissongPlatesFor.next();
+            platForOut.append("\n");
             platForOut.append(makeMessingPlateFor(plate));
         }
         return platForOut;
